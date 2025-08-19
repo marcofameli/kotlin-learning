@@ -1,0 +1,37 @@
+data class Usuario(var nome: String?, var idade: Int?)
+
+fun main() {    
+    
+    val meuUsuario = run {     
+        
+    	val usuario = Usuario (nome = "Marco", idade = 22)    
+    	usuario
+	}
+    
+    println("O usuário criado é: ${meuUsuario.nome}")
+    
+    meuUsuario.apply {
+        nome = "Marquinho"
+        println("nome alterado para $nome")
+    }
+    
+    println("Nome agora é ${meuUsuario.nome}")
+    
+    meuUsuario.also {
+        it.idade = 23
+    }
+    
+    println("idade subiu para ${meuUsuario.idade}")
+	
+    meuUsuario?.let{
+		println("verificando o nullsafe... ${it.nome}")
+    }
+    
+   val testeWith = with(meuUsuario){
+        nome = "Roger"
+        idade = 30
+    	"Informações processadas"
+    }
+   	println(testeWith) // WITH não funciona igual as outras, ele precisa de uma variavel para ter retorno...
+     
+}
