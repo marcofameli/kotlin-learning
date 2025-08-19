@@ -1,0 +1,33 @@
+// Sealed classes are great to lock things you need into a class, like some private party, you invite only the bests friends to the party xD
+// Like Enums, but ENUMS is used to constant, like BRL, EURO and POUND, simple things, sealed is used to make more...
+sealed class ResultOfTransaction {
+    
+    class Success(val successMessage: String) : ResultOfTransaction()
+    
+    class Error(val errorMessage: String) : ResultOfTransaction()
+    
+    object Loading : ResultOfTransaction()    
+}
+
+fun main(){
+    
+   val resultado = ResultOfTransaction.Success("Pagamento aprovado")
+    
+   val mensagem =  when (resultado) {
+        is ResultOfTransaction.Success -> {
+            
+          "${resultado.successMessage}! Pix realizado"
+        } 
+        
+        is ResultOfTransaction.Error -> {
+         "Pix não realizado... ${resultado.errorMessage}"
+        }
+        
+        is ResultOfTransaction.Loading -> {
+          "carregando"
+        }        
+    }
+   
+   println(mensagem)
+    
+}
